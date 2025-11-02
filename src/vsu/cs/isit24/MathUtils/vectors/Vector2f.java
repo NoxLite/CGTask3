@@ -2,7 +2,7 @@ package vsu.cs.isit24.MathUtils.vectors;
 
 import vsu.cs.isit24.MathUtils.interfaces.Vector;
 
-public class Vector2f implements Vector {
+public class Vector2f implements Vector, Comparable<Vector2f> {
 
     private float x;
     private float y;
@@ -37,8 +37,11 @@ public class Vector2f implements Vector {
 
     @Override
     public void normalize() {
-        x = x / len();
-        y = y / len();
+        float l = len();
+        if (l != 0) {
+            x = x / l;
+            y = y / l;
+        }
     }
 
 
@@ -46,13 +49,13 @@ public class Vector2f implements Vector {
         return x * v.getX() + y * v.getY();
     }
 
-    @Override
+    /*@Override
     public float[][] toMatrix() {
         return new float[][] {
                 {x, 0},
                 {0, y}
         };
-    }
+    }*/
 
     @Override
     public void multiplyByScalar(float number) {
@@ -64,5 +67,18 @@ public class Vector2f implements Vector {
     public void divideByScalar(float number) {
         x /= number;
         y /= number;
+    }
+
+    @Override
+    public int compareTo(Vector2f o) {
+        float EPS = 10e-6F;
+        if (-EPS <= x - o.getX() && x - o.getX() <= EPS &&
+                -EPS <= y - o.getY() && y - o.getY() <= EPS) {
+            return 0;
+        };
+        if (x > o.getX() && y > o.getY()) {
+            return 1;
+        }
+        return -1;
     }
 }

@@ -3,30 +3,65 @@ package tests;
 import org.junit.Before;
 import org.junit.Test;
 import vsu.cs.isit24.MathUtils.vectors.Vector2f;
-import vsu.cs.isit24.MathUtils.vectors.Vector3f;
-import vsu.cs.isit24.MathUtils.vectors.Vector4f;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.Assert.*;
 
 
 public class Vector2fTests {
 
-    Vector2f vector2f = new Vector2f(8, 6);
-    Vector3f vector3f  = new Vector3f(1, 2, 2);
-    Vector4f vector4f = new Vector4f(3, 3, 3, 3);
+    Vector2f vector2f;
 
+    @Before
+    public void setup(){
+        vector2f = new Vector2f(8, 6);
+    }
 
     @Test
     public void testLen() {
         assertEquals(10, vector2f.len(), 10e-6);
-        assertEquals(3, vector3f.len(), 10e-6);
-        assertEquals(9, vector4f.len(), 10e-6);
     }
 
-    /* @Test
-    public void testPlusMinus() {
+    @Test
+    public void testPlus() {
+        vector2f.plus(new Vector2f(2, -2));
+        Vector2f testVector2f = new Vector2f(10, 4);
+        assertEquals(testVector2f, vector2f);
+    }
 
-    } */
+    @Test
+    public void testMinus() {
+        vector2f.minus(new Vector2f(2, -2));
+        Vector2f testVector2f = new Vector2f(6, 8);
+        assertEquals(testVector2f, vector2f);
+    }
+
+    @Test
+    public void testNormalize() {
+        vector2f.normalize();
+        Vector2f testVector2f = new Vector2f(0.8F, 0.6F);
+        assertEquals(testVector2f, vector2f);
+    }
+
+    @Test
+    public void testMultiplyByScalar() {
+        Vector2f testVector2f = new Vector2f(80, 60);
+        vector2f.multiplyByScalar(10);
+        assertEquals(testVector2f, vector2f);
+    }
+
+    @Test
+    public void testDivideByScalar() {
+        Vector2f testVector2f = new Vector2f(4, 3);
+        vector2f.divideByScalar(2);
+        assertEquals(testVector2f, vector2f);
+    }
+
+    @Test
+    public void testScalarMultiply() {
+        Vector2f testVector2f = new Vector2f(3, -2);
+        assertEquals(12, testVector2f.scalarMultiply(vector2f), 10e-6f);
+    }
 
 
 }

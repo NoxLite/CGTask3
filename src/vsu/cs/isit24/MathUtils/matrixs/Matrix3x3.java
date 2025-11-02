@@ -6,16 +6,26 @@ import vsu.cs.isit24.MathUtils.vectors.Vector3f;
 public class Matrix3x3 implements Matrix {
     private float[][] matrix;
 
-    public Matrix3x3(float[][] matrix) {
+    public Matrix3x3 (float[][] matrix) throws IllegalArgumentException {
+        if (matrix.length == 0) {
+            throw new IllegalArgumentException("Matrix's length must be 3x3, but get void matrix");
+        }
+        if (matrix.length != 3) {
+            throw new IllegalArgumentException(String.format("Matrix's length must be 3x3, but get %dx%d %n", matrix.length, matrix[0].length));
+        }
+        if (matrix[0].length != 3) {
+            throw new IllegalArgumentException(String.format("Matrix's length must be 3x3, but get %dx%d %n", matrix.length, matrix[0].length));
+        }
         this.matrix = matrix;
     }
 
     public Matrix3x3() {
-        this.matrix = new float[][] {
+        new Matrix3x3(new float[][] {
                 {1, 0, 0},
                 {0, 1, 0},
                 {0, 0, 1}
-        };
+            }
+        );
     }
 
     public float[][] getMatrix() {

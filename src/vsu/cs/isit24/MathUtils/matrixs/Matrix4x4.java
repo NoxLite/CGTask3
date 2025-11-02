@@ -6,7 +6,16 @@ import vsu.cs.isit24.MathUtils.vectors.Vector4f;
 public class Matrix4x4 implements Matrix {
     private float[][] matrix;
 
-    public Matrix4x4(float[][] matrix) {
+    public Matrix4x4(float[][] matrix) throws IllegalArgumentException {
+        if (matrix.length == 0) {
+            throw new IllegalArgumentException("Matrix's length must be 4x4, but get void matrix");
+        }
+        if (matrix.length != 4) {
+            throw new IllegalArgumentException(String.format("Matrix's length must be 4x4, but get %dx%d %n", matrix.length, matrix[0].length));
+        }
+        if (matrix[0].length != 4) {
+            throw new IllegalArgumentException(String.format("Matrix's length must be 4x4, but get %dx%d %n", matrix.length, matrix[0].length));
+        }
         this.matrix = matrix;
     }
 

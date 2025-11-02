@@ -2,7 +2,7 @@ package vsu.cs.isit24.MathUtils.vectors;
 
 import vsu.cs.isit24.MathUtils.interfaces.Vector;
 
-public class Vector4f implements Vector {
+public class Vector4f implements Vector, Comparable<Vector4f> {
     private float x;
     private float y;
     private float z;
@@ -38,10 +38,13 @@ public class Vector4f implements Vector {
 
     @Override
     public void normalize() {
-        x /= len();
-        y /= len();
-        z /= len();
-        w /= len();
+        float l = len();
+        if (l != 0) {
+            x = x / l;
+            y = y / l;
+            z = z / l;
+            w = w / l;
+        }
     }
 
     public void plus(Vector4f v) {
@@ -62,10 +65,10 @@ public class Vector4f implements Vector {
         return x * v.getX() + y * v.getY() + z * v.getZ() + w * v.getW();
     }
 
-    @Override
+    /*@Override
     public float[][] toMatrix() {
         return Vector.super.toMatrix();
-    }
+    } */
 
     @Override
     public void divideByScalar(float number) {
@@ -81,5 +84,20 @@ public class Vector4f implements Vector {
         y *= number;
         z *= number;
         w *= number;
+    }
+
+    @Override
+    public int compareTo(Vector4f o) {
+        float EPS = 10e-6F;
+        if (-EPS <= x - o.getX() && x - o.getX() <= EPS &&
+                -EPS <= y - o.getY() && y - o.getY() <= EPS &&
+                -EPS <= z - o.getZ() && z - o.getZ() <= EPS &&
+                -EPS <= w - o.getW() && w - o.getW() <= EPS) {
+            return 0;
+        };
+        if (x > o.getX() && y > o.getY() && z > o.getX() && w > o.getW()) {
+            return 1;
+        }
+        return -1;
     }
 }

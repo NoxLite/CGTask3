@@ -4,9 +4,9 @@ import vsu.cs.isit24.MathUtils.vectors.Vector2f;
 
 public interface Vector {
 
-    public default float[][] toMatrix() {
+    /*public default float[][] toMatrix() {
         return new float[0];
-    }
+    }*/
 
     default void divideByScalar(float number) {
         return;
